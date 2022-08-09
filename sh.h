@@ -26,5 +26,8 @@ t_tree  *parser(char **list);
 void    executor(t_tree *tree);
 void 	free_tree(t_tree *tree);
 void 	free_list(char **list);
+void    disp(t_tree *tree, int ident);
+t_tree  *parse_pipeline(char ***list);
+t_tree  *parse_cmdlist(char ***list);
 
 #endif

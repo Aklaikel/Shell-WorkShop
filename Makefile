@@ -1,6 +1,8 @@
+NAME = minishell
+
 SRC = parser.c sh.c split.c execution.c
-sh: $(SRC)
+$(NAME): $(SRC)
 	gcc $(SRC) -o $@
 re:
-	rm -f sh
+	rm -f $(NAME)
 	@make

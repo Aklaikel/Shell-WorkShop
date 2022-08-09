@@ -26,12 +26,13 @@ int main(int ac, char **av, char **env)
 
 		tree = parser(list);
 		if (!tree)
-			return 2;
+			continue;
 
+		disp(tree, 0);
 		executor(tree);
 
 		// free memory: list, tree...
-		free_list(list);
+		// free_list(list);
 		free_tree(tree);
 	}
 }
@@ -49,4 +50,26 @@ void free_list(char **list) {
 	for (int i = 0; list[i]; i++)
 		free(list[i]);
 	free(list);
+}
+
+void disp(t_tree *tree, int ident) {
+	if (!tree)
+		return ;
+	
+	for (int i = 0; i < ident; i++)
+		printf("├   ");
+
+	if (tree->type == CMD) {
+		printf("├── CMD:");
+		for (int i = 0; (tree->cmd)[i]; i++)
+			printf(" %s", (tree->cmd)[i]);
+		printf("\n");
+	}
+
+	else if (tree->type == PIPE) {
+		printf("├── PIPE:\n");
+	}
+
+	disp(tree->left, ident + 1);
+	disp(tree->right, ident + 1);
 }
