@@ -22,18 +22,29 @@ void	executor(t_tree *tree) {
 		}
 
 	}
-	else if (tree->type == PIPE) 
-		return ;
-	// 	pipe(fd);
-	// 	pids[0] = fork();
-	// 	pids[1] = fork();
-	// 	if (pids[0] == 0) {
-	// 		executor(tree)
-	// 		exit(0);
-	// 	}
-	// 	if (pids[1] == 0) {
-			
-	// 		exit(0);
-	// 	}
-	// }
+	else if (tree->type == PIPE) {
+		pipe(fd);
+		pids[0] = fork();
+		if (pids[0] == 0) {
+			close(1);
+			dup2(fd[1], 1);
+			close(fd[0]);
+			close(fd[1]);
+			executor(tree->left);
+			exit(0);
+		}
+		pids[1] = fork();
+		if (pids[1] == 0) {
+			close(0);
+			dup2(fd[0], 0);
+			close(fd[0]);
+			close(fd[1]);
+			executor(tree->right);
+			exit(0);
+		}
+		close(fd[0]);
+		close(fd[1]);
+		wait(NULL);
+		wait(NULL);
+	}
 }
