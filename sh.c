@@ -7,7 +7,7 @@ void prompt(char *cmdline)
 	int nbytes = read(0, cmdline, MAXSIZE);
 	if (nbytes == -1)
 		exit(1);
-	cmdline[nbytes] = '\0';
+	cmdline[nbytes-1] = '\0';
 }
 
 int main(int ac, char **av, char **env)
