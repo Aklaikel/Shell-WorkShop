@@ -22,7 +22,7 @@ void	executor(t_tree *tree) {
 		}
 
 	}
-	else if (tree->type == PIPE) {
+	else if (tree->type == PIPE) 
 		return ;
 	// 	pipe(fd);
 	// 	pids[0] = fork();
