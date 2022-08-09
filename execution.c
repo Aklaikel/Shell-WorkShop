@@ -1,5 +1,6 @@
 #include "sh.h"
 #include <stdio.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 void	executor(t_tree *tree) {
@@ -20,6 +21,7 @@ void	executor(t_tree *tree) {
 			fprintf(stderr, "command not found!\n");
 			exit(1);
 		}
+		waitpid(pid, NULL, 0);
 
 	}
 	else if (tree->type == PIPE) {
