@@ -24,5 +24,7 @@ char	**ft_split(char const *s, char c);
 t_tree  *new_node(int type, char **cmd, t_tree *left, t_tree *right);
 t_tree  *parser(char **list);
 void    executor(t_tree *tree);
+void 	free_tree(t_tree *tree);
+void 	free_list(char **list);
 
 #endif
